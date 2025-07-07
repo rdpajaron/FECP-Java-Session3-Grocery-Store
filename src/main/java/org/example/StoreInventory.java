@@ -1,7 +1,5 @@
 package org.example;
 
-import java.util.HashMap;
-
 import static org.example.GroceryInventorySystem.productStock;
 
 public class StoreInventory {
@@ -39,6 +37,10 @@ public class StoreInventory {
     }
 
     public void addProduct(String product, int quantity){
+        if(quantity < 1){
+            System.out.println("Invalid Quantity!");
+            return;
+        }
         if(productStock.containsKey(product)){
             System.out.println("Product already exists in inventory!");
             return;
@@ -47,6 +49,10 @@ public class StoreInventory {
     }
 
     public void updateStock(String product, int newQuantity){
+        if(quantity < 1){
+            System.out.println("Invalid Quantity!");
+            return;
+        }
         if(!productStock.containsKey(product)){
             System.out.println("Product does not exist!");
             return;
@@ -62,5 +68,9 @@ public class StoreInventory {
         System.out.println(product + " is in stock: " + productStock.get(product));
     }
 
+    public void removeProduct(String product){
+        productStock.remove(product);
+        System.out.println("Product removed.");
+    }
 
 }

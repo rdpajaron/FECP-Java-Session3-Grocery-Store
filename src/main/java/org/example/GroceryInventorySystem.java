@@ -10,6 +10,7 @@ public class GroceryInventorySystem {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int option;
+        String product;
         do{
             StoreInventory storeInventory = new StoreInventory();
             System.out.println(
@@ -31,7 +32,7 @@ public class GroceryInventorySystem {
                     break;
                 case 2://add product
                     System.out.print("Enter product name: ");
-                    String product = scanner.nextLine();
+                    product = scanner.nextLine();
                     System.out.print("Enter quantity: ");
                     int quantity = Integer.parseInt(scanner.nextLine());
                     storeInventory.addProduct(product, quantity);
@@ -48,20 +49,21 @@ public class GroceryInventorySystem {
                     int newQuantity = Integer.parseInt(scanner.nextLine());
                     storeInventory.updateStock(product, newQuantity);
                     break;
-                case 5:
+                case 5://remove product
+                    System.out.print("Enter product name to remove: ");
+                    product = scanner.nextLine();
+                    storeInventory.removeProduct(product);
                     break;
                 case 6:
+                    System.out.println("Exiting system...");
                     break;
                 default:
                     System.out.println("Invalid option! Please try again.");
                     break;
-
             }
 
         }while(option != 6);
 
     }
-
-
 
 }
