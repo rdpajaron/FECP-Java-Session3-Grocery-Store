@@ -26,7 +26,7 @@ public class GroceryInventorySystem {
 
             switch(option){
                 case 1:
-//                    groceryInventorySystem.viewInventory();
+                    groceryInventorySystem.viewInventory();
                 case 2://add product
                     System.out.print("Enter product name:");
                     String product = scanner.nextLine();
@@ -46,6 +46,12 @@ public class GroceryInventorySystem {
 
         }while(option != 6);
 
+    }
+
+    public void viewInventory(){
+        productStock.forEach((k, v) -> {
+            System.out.println(k + " - " + v + "pcs");
+        });
     }
 
     public void addProduct(String product, int quantity){
