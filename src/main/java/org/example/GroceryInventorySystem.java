@@ -15,7 +15,7 @@ public class GroceryInventorySystem {
             StoreInventory storeInventory = new StoreInventory();
             System.out.println(
                     """
-                            --- Grocery Inventory Menu
+                            \n--- Grocery Inventory Menu
                             1. View Inventory
                             2. Add Product
                             3. Check Product
@@ -45,7 +45,7 @@ public class GroceryInventorySystem {
                 case 4://update stock
                     System.out.print("Enter product name to check: ");
                     product = scanner.nextLine();
-                    System.out.println("Enter new stock quantity: ");
+                    System.out.print("Enter new stock quantity: ");
                     int newQuantity = Integer.parseInt(scanner.nextLine());
                     storeInventory.updateStock(product, newQuantity);
                     break;

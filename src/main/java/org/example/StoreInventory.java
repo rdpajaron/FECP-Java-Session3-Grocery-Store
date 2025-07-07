@@ -45,11 +45,12 @@ public class StoreInventory {
             System.out.println("Product already exists in inventory!");
             return;
         }
-        productStock.put(product, quantity);
+        productStock.put(product.trim(), quantity);
+        System.out.println("Product Added.");
     }
 
     public void updateStock(String product, int newQuantity){
-        if(quantity < 1){
+        if(newQuantity < 1){
             System.out.println("Invalid Quantity!");
             return;
         }
@@ -58,6 +59,7 @@ public class StoreInventory {
             return;
         }
         productStock.replace(product, newQuantity);
+        System.out.println("Stock updated!");
     }
 
     public void checkProduct(String product){
