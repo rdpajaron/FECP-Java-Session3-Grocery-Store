@@ -27,7 +27,7 @@ public class GroceryInventorySystem {
             option = Integer.parseInt(scanner.nextLine());
 
             switch(option){
-                case 1:
+                case 1://view inventory
                     storeInventory.viewInventory();
                     break;
                 case 2://add product
