@@ -2,6 +2,8 @@ package org.example;
 
 import java.util.HashMap;
 
+import static org.example.GroceryInventorySystem.productStock;
+
 public class StoreInventory {
     private String product;
     private int quantity;
@@ -11,6 +13,9 @@ public class StoreInventory {
         this.quantity = quantity;
     }
 
+    StoreInventory(){
+
+    }
 
 
     public String getProduct() {
@@ -28,5 +33,34 @@ public class StoreInventory {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public void viewInventory(){
+        productStock.forEach((k, v) -> System.out.println(k + " - " + v + " pcs"));
+    }
+
+    public void addProduct(String product, int quantity){
+        if(productStock.containsKey(product)){
+            System.out.println("Product already exists in inventory!");
+            return;
+        }
+        productStock.put(product, quantity);
+    }
+
+    public void updateStock(String product, int newQuantity){
+        if(!productStock.containsKey(product)){
+            System.out.println("Product does not exist!");
+            return;
+        }
+        productStock.replace(product, newQuantity);
+    }
+
+    public void checkProduct(String product){
+        if(!productStock.containsKey(product)){
+            System.out.println("Product does not exist!");
+            return;
+        }
+        System.out.println(product + " is in stock: " + productStock.get(product));
+    }
+
 
 }

@@ -11,7 +11,7 @@ public class GroceryInventorySystem {
         Scanner scanner = new Scanner(System.in);
         int option;
         do{
-            GroceryInventorySystem groceryInventorySystem = new GroceryInventorySystem();
+            StoreInventory storeInventory = new StoreInventory();
             System.out.println(
                     """
                             --- Grocery Inventory Menu
@@ -27,26 +27,26 @@ public class GroceryInventorySystem {
 
             switch(option){
                 case 1:
-                    groceryInventorySystem.viewInventory();
+                    storeInventory.viewInventory();
                     break;
                 case 2://add product
                     System.out.print("Enter product name: ");
                     String product = scanner.nextLine();
                     System.out.print("Enter quantity: ");
                     int quantity = Integer.parseInt(scanner.nextLine());
-                    groceryInventorySystem.addProduct(product, quantity);
+                    storeInventory.addProduct(product, quantity);
                     break;
                 case 3://check product
                     System.out.print("Enter product name to check: ");
                     product = scanner.nextLine();
-                    groceryInventorySystem.checkProduct(product);
+                    storeInventory.checkProduct(product);
                     break;
                 case 4://update stock
                     System.out.print("Enter product name to check: ");
                     product = scanner.nextLine();
                     System.out.println("Enter new stock quantity: ");
                     int newQuantity = Integer.parseInt(scanner.nextLine());
-                    groceryInventorySystem.updateStock(product, newQuantity);
+                    storeInventory.updateStock(product, newQuantity);
                     break;
                 case 5:
                     break;
@@ -62,32 +62,6 @@ public class GroceryInventorySystem {
 
     }
 
-    public void viewInventory(){
-        productStock.forEach((k, v) -> System.out.println(k + " - " + v + "pcs"));
-    }
 
-    public void addProduct(String product, int quantity){
-        if(productStock.containsKey(product)){
-            System.out.println("Product already exists in inventory!");
-            return;
-        }
-        productStock.put(product, quantity);
-    }
-
-    public void updateStock(String product, int newQuantity){
-        if(!productStock.containsKey(product)){
-            System.out.println("Product does not exist!");
-            return;
-        }
-        productStock.replace(product, newQuantity);
-    }
-
-    public void checkProduct(String product){
-        if(!productStock.containsKey(product)){
-            System.out.println("Product does not exist!");
-            return;
-        }
-        System.out.println(product + " is in stock: " + productStock.get(product));
-    }
 
 }
