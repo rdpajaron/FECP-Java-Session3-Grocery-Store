@@ -38,7 +38,7 @@ class StoreInventoryTest {
     }
 
     @Test
-    void addProductScenarios() {
+    void addValidProductQuantity() {
         storeInventory.addProduct("Banana", 30);
         Map<String, Integer> expected = new HashMap<>();
         expected.put("Banana", 30);
@@ -46,11 +46,13 @@ class StoreInventoryTest {
     }
 
     @Test
-    void addInvalidProductQuantity(){//add zero and negative quantity
+    void addInvalidProductQuantity(){
+        //add negative quantity
         storeInventory.addProduct("Orange", -1);
         assertTrue(outContent.toString().contains("Invalid Quantity!"));
         assertTrue(GroceryInventorySystem.productStock.isEmpty());
 
+        //add zero quantity
         storeInventory.addProduct("Mango", 0);
         assertTrue(outContent.toString().contains("Invalid Quantity!"));
         assertTrue(GroceryInventorySystem.productStock.isEmpty());
@@ -67,13 +69,14 @@ class StoreInventoryTest {
 
     @Test
     void updateStock() {
-        storeInventory.addProduct("Orange", 30);
+        storeInventory.addProduct("Bread", 30);
         Map<String, Integer> expected = new HashMap<>();
-        expected.put("Orange", 30);
+        expected.put("Bread", 30);
         assertEquals(expected, GroceryInventorySystem.productStock);
 
-        storeInventory.updateStock("Orange", 15);
-        expected.replace("Orange", 15);
+        storeInventory.updateStock("Bread", 15);
+        expected.replace("Bread", 15);
+        //bread stock should be 15
         assertEquals(expected, GroceryInventorySystem.productStock);
     }
 
@@ -87,25 +90,25 @@ class StoreInventoryTest {
 
     @Test
     void updateStockWithNonExistingProduct(){
-        storeInventory.updateStock("Cheese", 10);
-        assertTrue(outContent.toString().contains("Product does not exist!"));
+        storeInventory.updateStock("Tofu", 20);
+        assertTrue(outContent.toString().contains("Product not found"));
     }
 
     @Test
-    void checkProductScenarios() {
+    void checkExistingProduct() {
         storeInventory.addProduct("Milk", 20);
-        //check existing product
         storeInventory.checkProduct("Milk");
         assertTrue(outContent.toString().contains("Milk is in stock: 20"));
+    }
 
-        //check non-existing product
+    @Test
+    void checkNonExistingProduct(){
         storeInventory.checkProduct("Ice Cream");
         assertTrue(outContent.toString().contains("Product not found"));
     }
 
     @Test
     void removeExistingProduct() {
-        //remove existing product
         storeInventory.addProduct("Eggs", 30);
         assertTrue(GroceryInventorySystem.productStock.containsKey("Eggs"));
         assertEquals(30, GroceryInventorySystem.productStock.get("Eggs"));
@@ -115,7 +118,6 @@ class StoreInventoryTest {
 
     @Test
     void removeNonExistingProduct() {
-        //remove non-existing product
         storeInventory.removeProduct("Pizza");
         assertTrue(outContent.toString().contains("Product not found"));
     }

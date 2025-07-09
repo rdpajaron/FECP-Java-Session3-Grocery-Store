@@ -24,12 +24,12 @@ public class StoreInventory {
 
 
     public void updateStock(String product, int newQuantity){
-        if(newQuantity < 1){
+        if(newQuantity < 0){
             System.out.println("Invalid Quantity!");
             return;
         }
         if(!productStock.containsKey(product)){
-            System.out.println("Product does not exist!");
+            System.out.println("Product not found.");
             return;
         }
         productStock.replace(product, newQuantity);
